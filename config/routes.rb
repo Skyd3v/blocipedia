@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'welcome/index'
-
-  get 'welcome/about'
+  #Assign about page to be correctly linked
+  get 'about' => 'welcome#about'
   #Assign welcome page as index
   root 'welcome#index'
 

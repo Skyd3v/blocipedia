@@ -1,0 +1,24 @@
+<br>
+<div class="jumbotron">
+    <h1>Blocipedia: Social, Markdown Wikis</h1>
+    <h3>Create and share Markdown Wikis</h3>
+    <p>
+        <% if !user_signed_in? %>
+        <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-success' %>
+        <%= link_to "Sign In", new_user_session_path, :class => 'btn btn-default' %>
+        <% end %>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Create as many public wikis as you want!</p>
+        <span class="glyphicon glyphicon-fire"></span><br>
+        Free Plan
+    </div>
+    <div class="col-md-6">
+        <p>Create private wikis!</p>
+        <span class="glyphicon glyphicon-euro"></span><br>
+        Premium Plan
+    </div>
+</div>

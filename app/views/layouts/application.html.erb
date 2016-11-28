@@ -15,8 +15,7 @@
                 <div class="pull-right user-info">
                     <% if user_signed_in? %>
                     Signed in as:
-                    <strong><%= current_user.email %></strong>
-                    |
+                    <strong><%= link_to current_user.email, user_path(current_user) %></strong>
 
                     <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'navbar-link' %>
                     -

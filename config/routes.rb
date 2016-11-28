@@ -2,6 +2,7 @@ Rails.application.routes.draw do
     resources :wikis
 
     devise_for :users
+    resources :users, only: [:show]
     # Assign about page to be correctly linked
     get 'about' => 'welcome#about'
     # Assign welcome page as index

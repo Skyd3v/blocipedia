@@ -1,33 +1,25 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 # Create Users
+userArray = []
 25.times do
     pw = Faker::Internet.password(6)
-    User.create!(
+    userArray << {
         email: Faker::Internet.email,
         password: pw,
         password_confirmation: pw
-    )
+    }
 end
-users = User.all
+users = User.create!(userArray)
 
 # Create Wikis
+wikiArray = []
 30.times do
-    wiki = Wiki.create!(
+    wikiArray << {
         title: Faker::Beer.name,
         body: Faker::ChuckNorris.fact,
         user: users.sample
-    )
-
-    wiki.update_attribute(:created_at, rand(10.minutes..1.year).ago)
+    }
 end
-wikis = Wiki.all
+wikis = Wiki.create!(wikiArray)
 
 # Create a standard member
 member = User.create!(

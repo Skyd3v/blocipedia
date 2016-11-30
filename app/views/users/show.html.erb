@@ -1,2 +1,8 @@
-<h3><%= @user.email if @user.email%></h3>
-User status: <%= @user.role %>
+<h1><%= @user.email if @user.email%></h1>
+<h3>User type:
+    <%= @user.role %></h3>
+
+<!-- Btn should only appear is standard member looking at their own profile -->
+<% if user_can_upgrade?(@user) %>
+<%= link_to "Upgrade to Premium Account!", new_charge_path, class: 'btn btn-success' %>
+<% end %>

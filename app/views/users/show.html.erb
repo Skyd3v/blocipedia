@@ -6,3 +6,7 @@
 <% if user_can_upgrade?(@user) %>
 <%= link_to "Upgrade to Premium Account!", new_charge_path, class: 'btn btn-success' %>
 <% end %>
+
+<% if @user.role == 'premium' %>
+    <%= link_to "Downgrade", charges_path, method: :destroy, class: 'btn btn-default' %>
+  <% end %></p>

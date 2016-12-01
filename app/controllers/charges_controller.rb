@@ -34,6 +34,12 @@ class ChargesController < ApplicationController
        flash[:alert] = e.message
        redirect_to new_charge_path
    end
+
+    def destroy
+        flash[:notice] = "Please try our Premium services again in the future, #{current_user.email}!"
+        current_user.standard!
+        redirect_to current_user
+   end
 end
 
 private

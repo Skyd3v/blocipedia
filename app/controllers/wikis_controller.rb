@@ -1,4 +1,6 @@
 class WikisController < ApplicationController
+    skip_before_filter :authenticate_user!, only: [:index, :show, :edit, :update]
+
     def index
         @wikis = Wiki.all
     end
@@ -12,18 +14,13 @@ class WikisController < ApplicationController
     end
 
     def create
-        # #9
-        @wiki = Wiki.new
-        @wiki.title = params[:wiki][:title]
-        @wiki.body = params[:wiki][:body]
+        @wiki = Wiki.create(wiki_params)
+        @wiki.user = current_user
 
-        # #10
         if @wiki.save
-            # #11
             flash[:notice] = 'Wiki was saved.'
             redirect_to @wiki
         else
-            # #12
             flash.now[:alert] = 'There was an error saving the wiki. Please try again.'
             render :new
         end
@@ -35,17 +32,17 @@ class WikisController < ApplicationController
 
     def update
         @wiki = Wiki.find(params[:id])
-        @wiki.title = params[:wiki][:title]
-        @wiki.body = params[:wiki][:body]
+        authorize @wiki
+        @wiki.assign_attributes(wiki_params)
 
         if @wiki.save
-            flash[:notice] = 'Wiki was updated.'
+            flash[:notice] = 'Wiki was updated'
             redirect_to @wiki
         else
-            flash.now[:alert] = 'There was an error saving the wiki. Please try again.'
+            flash.now[:alert] = 'Error saving wiki. Please try again.'
             render :edit
         end
-   end
+    end
 
     def destroy
         @wiki = Wiki.find(params[:id])
@@ -54,8 +51,14 @@ class WikisController < ApplicationController
             flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
             redirect_to wikis_path
         else
-            flash.now[:alert] = 'There was an error deleting the Wiki.'
+            flash.now[:alert] = 'There was an error deleting the wiki'
             render :show
         end
+    end
+
+    private
+
+    def wiki_params
+        params.require(:wiki).permit(:title, :body, :private)
     end
 end

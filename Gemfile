@@ -22,7 +22,7 @@ gem 'figaro', '1.0'
 gem 'pry'
 gem 'devise'
 gem 'bootstrap-sass'
-
+gem 'pundit'
 
 group :development, :test do
     gem 'byebug'

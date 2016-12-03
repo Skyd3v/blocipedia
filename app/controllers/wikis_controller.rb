@@ -2,11 +2,15 @@ class WikisController < ApplicationController
     skip_before_filter :authenticate_user!, only: [:index, :show, :edit, :update]
 
     def index
-        @wikis = Wiki.all
+        @wikis = Wiki.visible_to(current_user)
     end
 
     def show
         @wiki = Wiki.find(params[:id])
+        unless @wiki.private == false || current_user.role == 'admin' || current_user.role == 'premium'
+            flash[:alert] = 'You must upgrade your account to view private Wiki entries.'
+            redirect_to root_path
+    end
     end
 
     def new

@@ -13,5 +13,12 @@
 <p><%= markdown(@wiki.body) %></p>
 <p>Created by:
     <%= @wiki.user.email %></p>
+<div>
+    <% if @wiki.private %>
+    <h4>Collaborators:</h4>
+    <p><%= link_to "Add/Remove collaborators", new_wiki_collaborator_path(@wiki), class: 'btn btn-default' %></p>
+    <ul><%= render partial: 'wikis/collaborator', collection: @wiki.collaborators%></ul>
+    <% end %>
+</div>
 
 <%= link_to "New Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>

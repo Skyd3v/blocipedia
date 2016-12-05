@@ -1,0 +1,17 @@
+<h2>Add collaborators to <%= @wiki.title %>:</h2>
+
+<%= form_tag(wiki_collaborators_path(wiki_id: @wiki), method: :post) do %>
+    <table class="users_table">
+        <tr>
+            <th>User</th>
+            <th>Give Access?</th>
+        </tr>
+        <% User.all.each do |user| %>
+            <tr>
+                <td><%= user.email %></td>
+                <td><%= check_box_tag('collaborators[]', user.id, @wiki.collaborators.include?(user), {multiple: true}) %></td>
+            </tr>
+        <% end %>
+    </table>
+    <p><%= submit_tag("Save", class: 'btn btn-success', data: {confirm: "Are you sure you want to add/remove these collaborators?"}) %></p>
+<% end %>

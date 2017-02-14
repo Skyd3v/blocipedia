@@ -1,0 +1,8 @@
+<h1>All Collaborators for
+    <%= @wiki.title %>
+    Wiki
+</h1>
+
+<ul><%= render partial: 'wikis/collaborator', collection: @wiki.collaborators %></ul>
+
+<p><%= link_to "Return to Wiki", wiki_path(@wiki), class: 'btn btn-success' %></p>

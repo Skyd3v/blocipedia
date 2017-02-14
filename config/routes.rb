@@ -4,8 +4,12 @@ Rails.application.routes.draw do
 
     devise_for :users
     resources :users, only: [:show] do
-   patch '/downgrade', to: 'users#downgrade'
-end
+        patch '/downgrade', to: 'users#downgrade'
+    end
+
+    resources :wikis do
+        resources :collaborators, only: [:index, :new, :create]
+    end
     # Assign about page to be correctly linked
     get 'about' => 'welcome#about'
     # Assign welcome page as index

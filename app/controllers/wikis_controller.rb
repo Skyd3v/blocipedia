@@ -2,7 +2,7 @@ class WikisController < ApplicationController
     skip_before_filter :authenticate_user!, only: [:index, :show, :edit, :update]
 
     def index
-        @wikis = Wiki.visible_to(current_user)
+        @wikis = policy_scope(Wiki)
     end
 
     def show

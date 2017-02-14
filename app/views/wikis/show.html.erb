@@ -1,0 +1,24 @@
+<h1>
+    <%= @wiki.title %>
+    <br>
+    <small>
+        submitted
+        <%= time_ago_in_words(@wiki.created_at) %>
+        ago
+    </small>
+    <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-primary' %>
+    <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
+    <%= link_to "New Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
+</h1>
+<p><%= markdown(@wiki.body) %></p>
+<p>Created by:
+    <%= @wiki.user.email %></p>
+<div>
+    <% if @wiki.private %>
+    <h4>Collaborators:</h4>
+    <p><%= link_to "Add/Remove collaborators", new_wiki_collaborator_path(@wiki), class: 'btn btn-default' %></p>
+    <ul><%= render partial: 'wikis/collaborator', collection: @wiki.collaborators%></ul>
+    <% end %>
+</div>
+
+<%= link_to "New Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>

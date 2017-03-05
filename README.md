@@ -13,4 +13,4 @@ Concepts that were used for this application were the following :
 
 4)Private wikis for upgraded users.
 
-For a live demonstration of the application please go here :  https://blocipedia-by-skyd3v.herokuapp.com/
+For a live demonstration of the application please go here :  https://blocipedia-by-skyd3v.herokuapp.com/ .

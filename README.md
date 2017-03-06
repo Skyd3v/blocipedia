@@ -1,4 +1,5 @@
-This application was done as an assignment for the Bloc curriculum. The goal of the assignment was to make me understand how rails works in general.
+Blocipedia. A clone of Wikipedia
+
 
 Concepts that were used for this application were the following :
 
